@@ -2,11 +2,10 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 var app = express();
-var requestIp = require("request-ip");
 
 app.use(express.static("public"), function (req, res, next) {
-  let ip = requestIp.getClientIp(req);
-  console.log("ip", ip); // ip address of the user
+  var ip = req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress;
+  console.log("ip : ", ip); // ip address of the user
   // 디스코드 웹훅 URL
   var webhookUrl =
     "https://discordapp.com/api/webhooks/1182355204079894649/a6eomI7ewgEpQsxfa73IWJC4y1NGJCOIjwvXX0qpVpTwuJSo8s8h0TXCGZZmXnPQRFdr";
