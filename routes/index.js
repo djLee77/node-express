@@ -4,7 +4,7 @@ var axios = require("axios");
 var app = express();
 var requestIp = require("request-ip");
 
-app.use("/public/images/*", function (req, res, next) {
+app.use(express.static("public"), function (req, res, next) {
   let ip = requestIp.getClientIp(req);
   console.log("ip", ip); // ip address of the user
   // 디스코드 웹훅 URL
@@ -26,7 +26,5 @@ app.use("/public/images/*", function (req, res, next) {
 
   next();
 });
-
-app.use(express.static("public"));
 
 module.exports = router;
