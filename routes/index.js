@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 
-app.use(express.static('public'));
+app.use('/img',express.static(path.join(__dirname, 'public/images')));
 
 router.get("/", function (req, res, next) {
   res.render("index.html");
