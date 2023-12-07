@@ -2,8 +2,9 @@ var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
+const app = express();
 
-app.use('/img',express.static(path.join(__dirname, 'public/images')));
+app.use(express.static('public'));
 
 router.get("/", function (req, res, next) {
   res.render("index.html");
