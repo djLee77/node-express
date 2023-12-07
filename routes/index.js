@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index.html');
 });
 
-router.post('/api/get/image', function(req, res, next) {
+router.get('/api/get/image', function(req, res, next) {
   res.json({
     status: 200,
     data: {
