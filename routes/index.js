@@ -1,5 +1,6 @@
-var express = require('express');
-var axios = require('axios'); // axios 라이브러리를 불러옵니다.
+var express = require("express");
+var router = express.Router();
+var axios = require('axios');
 var app = express();
 
 app.use(express.static('public'));
