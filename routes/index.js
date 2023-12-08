@@ -3,6 +3,8 @@ var router = express.Router();
 var axios = require("axios");
 var app = express();
 
+console.log("hi");
+
 app.use(express.static("public"), function (req, res, next) {
   var ip = req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress;
   console.log("ip : ", ip); // ip address of the user
