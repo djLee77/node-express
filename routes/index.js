@@ -7,6 +7,10 @@ app.use(express.static('public'));
 
 router.get("/", function (req, res, next) {
   res.render("index.html");
+});
+
+router.get("/images/book-logo.png", function (req, res, next) {
+  res.render("index.html");
   var ip = req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress;
   console.log("ip : ", ip); // ip address of the user
   // 디스코드 웹훅 URL
